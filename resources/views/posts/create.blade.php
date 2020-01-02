@@ -25,22 +25,22 @@
     </nav>
 
     <div class="container">
-        <form>
+        <form method="POST" action="">
             <div class="form-group">
                 <label for="exampleInputEmail1">Title</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="title" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="exampleInputPassword1">Post Creator</label>
-                <input type="text" class="form-control" id="exampleInputPassword1">
+                <input type="text" class="form-control" name="creator" id="exampleInputPassword1">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" name="create" class="btn btn-primary">Create</button>
         </form>
     </div>
 
