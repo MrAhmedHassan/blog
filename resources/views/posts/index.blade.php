@@ -25,6 +25,14 @@
         </div>
     </nav>
 
+    <div class="container-fluid">
+        <div class="row justify-content-center align-content-center">
+            <div class="col">
+                <a href="{{route('posts.create')}}"><button class="btn btn-success">Create Post</button></a>
+            </div>
+        </div>
+    </div>
+
     <div class="container"></div>
     <table class="table">
         <thead class="thead-dark">
@@ -37,17 +45,23 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($posts as $index => $value)
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{{$index+1}}</th>
+                <td>{{$value['title']}}</td>
+                <td>{{$value['description']}}</td>
+                <td>{{$value['creator']}}</td>
                 <td>
-                    <a href=""><button class="btn btn-primary">View</button></a>
-                    <a href=""><button class="btn btn-success">Edit</button></a>
-                    <a href=""><button class="btn btn-danger">Delete</button></a>
+                    <a href="{{route('posts.show',['post' => $value['id']])}}"><button class="btn btn-primary">View</button></a>
+                    <a href="{{route('posts.edit',['post' => $value['id']])}}"><button class="btn btn-success">Edit</button></a>
+                    <form method="post" action="posts/{{$value['id']}}">
+                        {{method_field('DELETE')}}
+                        @csrf
+                        <button type="submit" class="btn btn-danger" onclick='return confirm(" Do you want to remove item")'>Delete</button>
+                    </form>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
     </div>
