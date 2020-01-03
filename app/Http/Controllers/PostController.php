@@ -8,20 +8,19 @@ use App\Post;
 class PostController extends Controller
 {
     //
-    function index()
+    public function index()
     {
-
         return view('posts.index', [
             'posts' => Post::all()
         ]);
     }
 
-    function create()
+    public function create()
     {
         return view('posts.create');
     }
 
-    function store()
+    public function store()
     {
         Post::create([
             'title' => request()->title,
@@ -32,7 +31,7 @@ class PostController extends Controller
         return redirect(route('posts.index'));
     }
 
-    function show($post)
+    public function show($post)
     {
         $postData = Post::find($post);
         $id = $postData->id;
@@ -44,7 +43,7 @@ class PostController extends Controller
         ]);
     }
 
-    function edit($post)
+    public function edit($post)
     {
         $postData = Post::find($post);
         return view('posts.edit', [
@@ -52,7 +51,7 @@ class PostController extends Controller
         ]);
     }
 
-    function update($post)
+    public function update($post)
     {
         $postData = Post::find($post);
         $postData->update([
@@ -63,7 +62,7 @@ class PostController extends Controller
         return redirect(route('posts.index'));
     }
 
-    function destroy($post)
+    public function destroy($post)
     {
         $postData = Post::find($post);
         $postData->delete();
