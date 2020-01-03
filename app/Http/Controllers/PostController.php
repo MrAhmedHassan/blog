@@ -22,10 +22,14 @@ class PostController extends Controller
 
     public function store()
     {
+        // get the obj of auth user data
+        $obj =  request()->user();
+        // dd($obj->id);
         Post::create([
             'title' => request()->title,
             'description' => request()->description,
-            'creator' => request()->creator
+            'creator' => request()->creator,
+            'user_id'=> $obj->id
         ]);
 
         return redirect(route('posts.index'));

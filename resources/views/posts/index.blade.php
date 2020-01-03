@@ -22,16 +22,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($posts as $index => $value)
+            @foreach($posts as $index => $post)
             <tr>
                 <th scope="row">{{$index+1}}</th>
-                <td>{{$value['title']}}</td>
-                <td>{{$value['description']}}</td>
-                <td>{{$value['creator']}}</td>
+                <td>{{$post['title']}}</td>
+                <td>{{$post['description']}}</td>
+                <td>{{$post->user->name}}</td>
                 <td>
-                    <a href="{{route('posts.show',['post' => $value['id']])}}"><button class="btn btn-primary">View</button></a>
-                    <a href="{{route('posts.edit',['post' => $value['id']])}}"><button class="btn btn-success">Edit</button></a>
-                    <form method="post" action="posts/{{$value['id']}}">
+                    <a href="{{route('posts.show',['post' => $post['id']])}}"><button class="btn btn-primary">View</button></a>
+                    <a href="{{route('posts.edit',['post' => $post['id']])}}"><button class="btn btn-success">Edit</button></a>
+                    <form method="post" action="posts/{{$post['id']}}" style="display: inline-block">
                         {{method_field('DELETE')}}
                         @csrf
                         <button type="submit" class="btn btn-danger" onclick='return confirm(" Do you want to remove item")'>Delete</button>

@@ -21,5 +21,5 @@
             </div>
             <button type="submit" name="create" class="btn btn-primary">Create</button>
         </form>
-    </div>
+    </div>  
    @endsection
