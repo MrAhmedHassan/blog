@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Http\Requests\StoreUpdatePostRequest;
+use Carbon\Carbon;
+
 
 class PostController extends Controller
 {
     //
     public function index()
     {
+        // $posts = paginate(3);
         return view('posts.index', [
-            'posts' => Post::all()
+            'posts' => Post::paginate(3)
         ]);
     }
 
@@ -20,16 +24,23 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store()
+    public function store(StoreUpdatePostRequest $request)
     {
+        // Validator::make(request()->all(), [
+        //     'title' => 'required',
+        //     'description' => 'required',
+        // ])->validate();
         // get the obj of auth user data
+
+        // $slugedTitle = str_slug($request->title);
         $obj =  request()->user();
         // dd($obj->id);
         Post::create([
-            'title' => request()->title,
-            'description' => request()->description,
-            'creator' => request()->creator,
-            'user_id'=> $obj->id
+            'title' => $request->title,
+            'description' => $request->description,
+
+            'user_id' => $obj->id,
+            // 'slug_title' => $slugedTitle
         ]);
 
         return redirect(route('posts.index'));
@@ -55,13 +66,13 @@ class PostController extends Controller
         ]);
     }
 
-    public function update($post)
+    public function update(StoreUpdatePostRequest $request, $post)
     {
         $postData = Post::find($post);
         $postData->update([
-            'title' => request()->title,
-            'description' => request()->description,
-            'creator' => request()->creator
+            'title' => $request->title,
+            'description' => $request->description,
+
         ]);
         return redirect(route('posts.index'));
     }
