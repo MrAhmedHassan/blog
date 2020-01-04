@@ -12,13 +12,6 @@
 */
 
 Route::get('/', function () {
-    // $newSlug = Str::slug('I am from ItSolutionStuff.com');
-    // dd($newSlug);
-
-
-    // $newSlug = str_slug('I am from ItSolutionStuff.com');
-
-    // dd($newSlug);
 
     return view('welcome');
 });
