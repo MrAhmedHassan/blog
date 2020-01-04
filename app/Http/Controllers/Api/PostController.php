@@ -11,7 +11,11 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(3);
+        // $post = Post::with('user')->get();
+        // $postss = Post::all();
+        // dd($post);
+        // dd($postss);
+        $posts = Post::paginate(2);
         // $arr = [];
 
         // foreach ($posts as $post) {

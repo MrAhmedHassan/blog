@@ -15,7 +15,7 @@ class PostController extends Controller
     {
         // $posts = paginate(3);
         return view('posts.index', [
-            'posts' => Post::paginate(3)
+            'posts' => Post::with('user')->paginate(3)
         ]);
     }
 

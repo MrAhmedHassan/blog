@@ -23,7 +23,6 @@ class StoreUpdatePostRequest extends FormRequest
      */
     public function rules()
     {
-        // dd($this->post);
         return [
             'title' => 'required|min:3|unique:posts,title,' . $this->post,
             'description' => 'required|min:10'
