@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdatePostRequest;
 use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
 use App\Post;
@@ -43,7 +44,7 @@ class PostController extends Controller
         // dd($post);
     }
 
-    public function store()
+    public function store(StoreUpdatePostRequest $request)
     {
         Post::create([
             'title' => request()->title,

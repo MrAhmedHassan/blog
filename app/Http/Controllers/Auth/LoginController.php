@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\User;
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -50,6 +54,47 @@ class LoginController extends Controller
     }
 
     /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+
+        // dd($user);
+        $nickName = $user->getNickname();
+        $email = $user->getEmail();
+
+
+        if ($user = User::where('email', $email)->first()) {
+            $user;
+        } else {
+            User::create([
+                'name' => $nickName,
+                'email' => $email
+            ]);
+        }
+        Auth::login($user, true);
+        return redirect(route('posts.index'));
+
+
+
+        // dd($nickName);
+        // $user->token;
+    }
+
+    /**
      * Obtain the user information from GitHub.
      *
      * @return \Illuminate\Http\Response
@@ -57,8 +102,25 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('github')->user();
+
+
         $nickName = $user->getNickname();
         $email = $user->getEmail();
+
+
+        if ($user = User::where('email', $email)->first()) {
+            $user;
+        } else {
+            User::create([
+                'name' => $nickName,
+                'email' => $email
+            ]);
+        }
+        Auth::login($user, true);
+        return redirect(route('posts.index'));
+
+
+
         // dd($nickName);
         // $user->token;
     }

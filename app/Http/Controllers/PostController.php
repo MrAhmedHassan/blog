@@ -49,10 +49,10 @@ class PostController extends Controller
     public function show($post)
     {
         $postData = Post::find($post);
-        $id = $postData->id;
-        $title = $postData->title;
-        $description = $postData->description;
-        $createAt = $postData->created_at;
+        // $id = $postData->id;
+        // $title = $postData->title;
+        // $description = $postData->description;
+        // $createAt = $postData->created_at;
         return view('posts.show', [
             "postData" => $postData
         ]);
