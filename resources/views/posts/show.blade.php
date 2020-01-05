@@ -5,6 +5,7 @@
 @php
 use Carbon\Carbon;
 @endphp
+
 <div class="card">
     <h5 class="card-header">Post Info</h5>
     <div class="card-body">
